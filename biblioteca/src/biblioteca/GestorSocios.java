@@ -1,5 +1,9 @@
 package biblioteca;
 
-public class GestorSocios {
+import java.util.Scanner;
 
+public class GestorSocios {
+	public static void run(Scanner scan) {
+		
+	}
 }
