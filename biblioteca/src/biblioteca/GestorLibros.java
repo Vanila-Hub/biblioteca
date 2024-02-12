@@ -15,6 +15,12 @@ public class GestorLibros {
 			case Menu.ELIMINAR_LIBRO:
 				
 				break;
+			case Menu.MODIFICAR_LIBRO:
+				
+				break;
+			case Menu.VER_LIBROS:
+				
+				break;
 			default:
 				break;
 			}
