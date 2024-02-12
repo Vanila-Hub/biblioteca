@@ -17,7 +17,9 @@ package biblioteca;
         public static final int ELIMINAR_SOCIO = 3;
         
         public static final int REALIZAR_PRESTAMO = 1;
-
+        public Menu() {
+			// TODO Auto-generated constructor stub
+		}
         public void mostrarMenuPrincipal() {
             System.out.println("Seleccione una opción:");
             System.out.println(GESTIONAR_LIBROS + ". Gestionar Libros");
