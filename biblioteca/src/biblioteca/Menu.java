@@ -15,6 +15,7 @@ package biblioteca;
         public static final int VER_SOCIO = 1;
         public static final int INSERTAR_SOCIO = 2;
         public static final int ELIMINAR_SOCIO = 3;
+        public static final int MODIFICAR_SOCIO = 4;
         
         public static final int REALIZAR_PRESTAMO = 1;
         public Menu() {

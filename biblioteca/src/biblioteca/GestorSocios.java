@@ -18,6 +18,9 @@ public class GestorSocios {
 			case Menu.VER_SOCIO:
 				
 				break;
+			case Menu.MODIFICAR_SOCIO:
+				
+				break;
 			default:
 				break;
 			}
