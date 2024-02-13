@@ -23,7 +23,7 @@ public class GestorSocios {
 				insertarSocio(scan);
 				break;
 			case Menu.ELIMINAR_SOCIO:
-				//System.out.println(Menu.ELIMINAR_SOCIO);
+				eliminarSocio(scan);
 				break;
 			case Menu.VER_SOCIO:
 				verSocios();
@@ -37,6 +37,23 @@ public class GestorSocios {
 		} while (opcion!=Menu.SALIR);
 	}
 	
+	private static void eliminarSocio(Scanner scan) {
+		System.out.println("Indoduzca el id del Socio a borrar: ");
+		String id = scan.nextLine();
+		try {
+			String consul = "DELETE FROM Socios WHERE Id = ?";
+			Connection cn = Conector.conectar();
+			PreparedStatement st = cn.prepareStatement(consul);
+			st.setString(1, id);
+			st.executeUpdate();
+			st.close();
+			System.out.println("Socio con ID :" + id + " Eliminado!");
+			Conector.CERRAR();
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		
+	}
 	private static void insertarSocio(Scanner scan) {
 		
 		Socio socio = new Socio();
