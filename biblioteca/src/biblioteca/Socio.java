@@ -51,4 +51,10 @@ public class Socio {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
+	@Override
+	public String toString() {
+		return "Socio [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion
+				+ ", poblacion=" + poblacion + ", provincia=" + provincia + ", dni=" + dni + "]";
+	}
+	
 }

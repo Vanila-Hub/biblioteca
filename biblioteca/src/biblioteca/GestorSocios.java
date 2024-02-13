@@ -58,7 +58,7 @@ public class GestorSocios {
 			System.err.println(e);
 		}
 		for (Socio socio : socios) {
-			System.out.println(socio);
+			System.out.println(socio.toString());
 		}
 		return socios;
 	}
