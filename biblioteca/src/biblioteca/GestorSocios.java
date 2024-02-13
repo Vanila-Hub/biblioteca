@@ -66,9 +66,9 @@ public class GestorSocios {
 			st.setString(6,socio.getDni());
 			st.executeUpdate();
 			st.close();
+			System.out.println("Socio Añadido \n !Bienvenido! " + socio.getNombre());
 			Conector.CERRAR();
 			
-			System.out.println("Socio Añadido \n !Bienvenido! " + socio.getNombre());
 		} catch (Exception e) {
 			System.err.println(e);
 		}
