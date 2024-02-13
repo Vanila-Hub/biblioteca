@@ -37,7 +37,6 @@ package biblioteca;
             System.out.println(VER_LIBROS + ". Ver Libros");
             System.out.println(SALIR + ". Salir");
         }
-
         public void mostrarMenuSocios() {
             System.out.println("Seleccione una opción:");
             System.out.println(VER_SOCIO + ". Ver Socio");

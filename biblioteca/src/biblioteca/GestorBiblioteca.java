@@ -8,7 +8,6 @@ public class GestorBiblioteca {
 
 	private static void run() {
 		
-		
 	}
 
 }

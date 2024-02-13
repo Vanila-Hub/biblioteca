@@ -8,7 +8,6 @@ public class Socio {
 	private String poblacion;
 	private String provincia;
 	private String dni;
-	
 	public int getId() {
 		return id;
 	}

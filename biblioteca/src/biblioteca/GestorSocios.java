@@ -118,7 +118,6 @@ public class GestorSocios {
 			Connection cn = Conector.conectar();
 			String consul = "INSERT INTO socios (nombre, apellido,direccion, poblacion,provincia, dni) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement st = cn.prepareStatement(consul);
-		
 			st.setString(1,socio.getNombre());
 			st.setString(2,socio.getApellido());
 			st.setString(3,socio.getDireccion());
