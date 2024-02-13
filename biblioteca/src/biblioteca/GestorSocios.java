@@ -43,7 +43,6 @@ public class GestorSocios {
 			Connection cn = Conector.conectar();
 			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery(consulta);
-			
 			while (rs.next()) {
 				Socio socio = new Socio();
 				socio.setNombre(rs.getString("nombre"));
