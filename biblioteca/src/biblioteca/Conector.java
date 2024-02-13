@@ -26,7 +26,7 @@ public class Conector {
 		return con;
  }
  
- public  void CERRAR() {
+ public static void CERRAR() {
 	    try {
 	        if (con != null && !con.isClosed()) {
 	            con.close();
