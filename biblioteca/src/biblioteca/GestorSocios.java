@@ -52,7 +52,6 @@ public class GestorSocios {
 		} catch (Exception e) {
 			System.err.println(e);
 		}
-		
 	}
 	private static void insertarSocio(Scanner scan) {
 		
