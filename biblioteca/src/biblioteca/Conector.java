@@ -2,17 +2,20 @@ package biblioteca;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.mysql.cj.xdevapi.PreparableStatement;
 
 public class Conector {
 	
- final static String URL = "biblioteca";
- final static String USR = "root";
- final static String PASSWD = "";
- final static String HOST = "localhost";
- static Connection con=null;
+	private final static String URL = "biblioteca";
+	private final static String USR = "root";
+	private final static String PASSWD = "";
+	private final static String HOST = "localhost";
+	private static Connection con=null;
  
- public static void conectar() {
+ public static Connection conectar() {
 	 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -20,6 +23,7 @@ public class Conector {
 		} catch (Exception e) {
 			System.out.println(e);
 	}
+		return con;
  }
  
  public  void CERRAR() {
