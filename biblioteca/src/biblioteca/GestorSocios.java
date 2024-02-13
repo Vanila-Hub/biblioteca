@@ -29,7 +29,7 @@ public class GestorSocios {
 				verSocios();
 				break;
 			case Menu.MODIFICAR_SOCIO:
-				//System.out.println(Menu.MODIFICAR_SOCIO);
+				System.out.println(Menu.MODIFICAR_SOCIO);
 				break;
 			default:
 				break;
