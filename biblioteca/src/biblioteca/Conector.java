@@ -19,8 +19,7 @@ public class Conector {
 			con = DriverManager.getConnection("jdbc:mysql://" + HOST + "/" +URL,USR,PASSWD);
 		} catch (Exception e) {
 			System.out.println(e);
-		}
-	
+	}
  }
  
  public  void CERRAR() {
