@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorSocios {
+	static ArrayList<Socio> socios = new ArrayList<Socio>();
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		run(scan);
@@ -17,6 +18,7 @@ public class GestorSocios {
 		do {
 			Menu m = new Menu();
 			m.mostrarMenuSocios();
+			
 			opcion = Integer.parseInt(scan.nextLine());
 			switch (opcion) {
 			case Menu.INSERTAR_SOCIO:
@@ -26,10 +28,13 @@ public class GestorSocios {
 				eliminarSocio(scan);
 				break;
 			case Menu.VER_SOCIO:
-				verSocios();
+				socios = verSocios();
+				for (Socio socio : socios) {
+					System.out.println(socio.toString());
+				}
 				break;
 			case Menu.MODIFICAR_SOCIO:
-				System.out.println(Menu.MODIFICAR_SOCIO);
+				modificarSocio(scan);
 				break;
 			default:
 				break;
@@ -37,6 +42,46 @@ public class GestorSocios {
 		} while (opcion!=Menu.SALIR);
 	}
 	
+	private static void modificarSocio(Scanner scan) {
+		System.out.println("Introduzca el ID de socio a Modifiar: ");
+		
+		int id = Integer.parseInt(scan.nextLine());
+		for (Socio socio : socios) {
+			if(socio.getId()==id) {
+				System.out.println("Ingrese Nuevo el Nombre para " + socio.getNombre() + ": ");
+				socio.setNombre(scan.nextLine());
+				System.out.println("Ingrese Nuevo el Apellido: ");
+				socio.setApellido(scan.nextLine());
+				System.out.println("Ingrese Nuevo el Direccion: ");
+				socio.setDireccion(scan.nextLine());
+				System.out.println("Ingrese Nuevo el Dni: ");
+				socio.setDni(scan.nextLine());
+				System.out.println("Ingrese Nuevo el Poblacion: ");
+				socio.setPoblacion(scan.nextLine());
+				System.out.println("Ingrese Nuevo el Provincia: ");
+				socio.setProvincia(scan.nextLine());
+				try {
+					Connection cn = Conector.conectar();
+					String consul = "UPDATE socios SET nombre = ?,apellido = ?, direccion = ?,poblacion = ?, provincia = ?, dni = ? WHERE socios.id = ?";
+					PreparedStatement st = cn.prepareStatement(consul);
+					st.setString(1, socio.getNombre());
+					st.setString(2, socio.getApellido());
+					st.setString(3, socio.getDireccion());
+					st.setString(4, socio.getPoblacion());
+					st.setString(5, socio.getProvincia());
+					st.setString(6, socio.getDni());
+					st.setInt(7, socio.getId());
+					st.executeUpdate();
+					st.close();
+					System.out.println("Socio Actualizado");
+					Conector.CERRAR();
+				} catch (Exception e) {
+					System.err.println(e);
+				}
+			}
+		}
+		
+	}
 	private static void eliminarSocio(Scanner scan) {
 		System.out.println("Indoduzca el id del Socio a borrar: ");
 		String id = scan.nextLine();
@@ -109,9 +154,6 @@ public class GestorSocios {
 			}
 		} catch (Exception e) {
 			System.err.println(e);
-		}
-		for (Socio socio : socios) {
-			System.out.println(socio.toString());
 		}
 		return socios;
 	}

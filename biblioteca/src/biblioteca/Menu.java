@@ -43,6 +43,7 @@ package biblioteca;
             System.out.println(VER_SOCIO + ". Ver Socio");
             System.out.println(INSERTAR_SOCIO + ". Insertar Socio");
             System.out.println(ELIMINAR_SOCIO + ". Eliminar Socio");
+            System.out.println(MODIFICAR_SOCIO + ". Modificar Socio");
             System.out.println(SALIR + ". Salir");
         }
 
