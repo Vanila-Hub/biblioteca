@@ -26,6 +26,7 @@ public class GestorBBDD extends Conector{
 			System.err.println(e);
 		}
 	}
+	
 	public static void eliminarLibro(int id) {
 		try {
 			String consul = "DELETE FROM libros WHERE Id = ?";
@@ -44,8 +45,34 @@ public class GestorBBDD extends Conector{
 		return null;
 	}
 	
-	public void modificarLibro(int id) {
-
+	public void modificarLibro(int id,ArrayList<Libro> libros,Scanner scan) {
+		for (Libro libro : libros) {
+			if(libro.getId()==id) {
+				
+				System.out.println("Ingrese Nuevo el Titulo para " + libro.getTitulo() + ": ");
+				libro.setTitulo(scan.nextLine());
+				System.out.println("Ingrese Nuevo el Autor: ");
+				libro.setAutor(scan.nextLine());
+				System.out.println("Ingrese el Nuevo Numero de paginas: ");
+				libro.setNum_pag(Integer.parseInt(scan.nextLine()));
+				
+				try {
+					Connection cn = conectar();
+					String consul = "UPDATE libros SET titulo=?, autor=?,num_pag=? WHERE libros.id = ?";
+					PreparedStatement st = cn.prepareStatement(consul);
+					st.setString(1, libro.getTitulo());
+					st.setString(2, libro.getAutor());
+					st.setInt(3, libro.getNum_pag());
+					st.setInt(4, libro.getId());
+					st.executeUpdate();
+					st.close();
+					System.out.println("Libro Actualizado");
+					Conector.CERRAR();
+				} catch (Exception e) {
+					System.err.println(e);
+				}
+			}
+		}
 	}
 
 	public static ArrayList<Libro> verLibros(ArrayList<Libro> libros){

@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorLibros {
-
-//	public static void main(String[] args) {
-//		run(null);
-//
-//	}
-
 	static ArrayList<Libro> libros = new ArrayList<Libro>();
 	static GestorBBDD BaseDeDatos = new GestorBBDD();
 	
@@ -25,10 +19,10 @@ public class GestorLibros {
 						insertarLibro(scan);
 						break;
 					case Menu.ELIMINAR_LIBRO:
-						
+						eliminarLibro(scan);
 						break;
 					case Menu.MODIFICAR_LIBRO:
-						sliminarLibro(scan);
+						modificarLibro(scan);
 						break;
 					case Menu.VER_LIBROS:
 						libros =  BaseDeDatos.verLibros(libros);
@@ -39,7 +33,13 @@ public class GestorLibros {
 				} while (opcion!=Menu.SALIR);
 		}
 
-	private static void sliminarLibro(Scanner scan) {
+	private static void modificarLibro(Scanner scan) {
+		System.out.println("Introduzca el ID de socio a Modifiar: ");
+		int id = Integer.parseInt(scan.nextLine());
+		BaseDeDatos.modificarLibro(id,libros,scan);
+	}
+
+	private static void eliminarLibro(Scanner scan) {
 		System.out.println("Indoduzca el id del Libro a borrar: ");
 		int id = Integer.parseInt(scan.nextLine());
 		BaseDeDatos.eliminarLibro(id);
