@@ -68,7 +68,6 @@ public class GestorSocios {
 		socio.setPoblacion(scan.nextLine());
 		System.out.println("Ingrese el Provincia: ");
 		socio.setProvincia(scan.nextLine());
-		
 		BaseDeDatos.insertarSocio(socio);
 		
 	}
