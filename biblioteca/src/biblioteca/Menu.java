@@ -18,6 +18,7 @@ package biblioteca;
         public static final int MODIFICAR_SOCIO = 4;
         
         public static final int REALIZAR_PRESTAMO = 1;
+
         public Menu() {
 			// TODO Auto-generated constructor stub
 		}
@@ -47,6 +48,12 @@ package biblioteca;
         }
 
         public void mostrarMenuPrestamos() {
+            System.out.println("Seleccione una opción:");
+            System.out.println(REALIZAR_PRESTAMO+".Realizar Prestamo");
+            System.out.println(SALIR + ". Salir");
+        }
+        
+        public void mostrarMenuBiblioteca() {
             System.out.println("Seleccione una opción:");
             System.out.println(REALIZAR_PRESTAMO+".Realizar Prestamo");
             System.out.println(SALIR + ". Salir");
