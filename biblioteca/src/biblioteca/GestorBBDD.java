@@ -50,6 +50,7 @@ public class GestorBBDD extends Conector{
 				libro.setTitulo(rs.getString("titulo"));
 				libro.setId(rs.getInt("id"));
 				libro.setNum_pag(rs.getInt("num_pag"));
+				libros.add(libro);
 			}
 		} catch (Exception e) {
 			System.err.println(e);
