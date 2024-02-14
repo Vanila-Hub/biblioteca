@@ -37,6 +37,28 @@ public class GestorBBDD extends Conector{
 
 	}
 
+	public static ArrayList<Libro> verLibros(ArrayList<Libro> libros){
+		libros = new ArrayList<Libro>();
+		try {
+			String consulta = "SELECT * FROM libros";
+			Connection cn = conectar();
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(consulta);
+			while (rs.next()) {
+				Libro libro = new Libro();
+				libro.setAutor(rs.getString("autor"));
+				libro.setTitulo(rs.getString("titulo"));
+				libro.setId(rs.getInt("id"));
+				libro.setNum_pag(rs.getInt("num_pag"));
+			}
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		Visor.mostrarLibros(libros);
+		return libros;
+		
+	}
+	
 	public static ArrayList<Socio> verSocios(ArrayList<Socio> socios) {
 		socios = new ArrayList<Socio>();
 		try {

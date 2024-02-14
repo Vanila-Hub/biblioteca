@@ -31,6 +31,7 @@ public class GestorLibros {
 						
 						break;
 					case Menu.VER_LIBROS:
+						libros =  BaseDeDatos.verLibros(libros);
 						
 						break;
 					default:

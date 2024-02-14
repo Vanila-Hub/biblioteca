@@ -3,8 +3,10 @@ package biblioteca;
 import java.util.ArrayList;
 
 public class Visor {
-	public static void mostrarLibros(ArrayList Libros) {
-		
+	public static void mostrarLibros(ArrayList<Libro> Libros) {
+		for (Libro libro : Libros) {
+			System.out.println(libro.toString());
+		}
 	}
 	public static void mostrarLibro(Libro Libros) {
 		
