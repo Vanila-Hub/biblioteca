@@ -26,6 +26,10 @@ public class GestorBBDD extends Conector{
 	public static void eliminarSocio(int id) {
 	        
 	 }
+	
+	public void modificarSocio(int id) {
+
+	}
 
 	 public static void realizarPrestamo() {
 	        
