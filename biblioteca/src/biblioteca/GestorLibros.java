@@ -1,5 +1,6 @@
 package biblioteca;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorLibros {
@@ -9,6 +10,9 @@ public class GestorLibros {
 //
 //	}
 
+	static ArrayList<Libro> libros = new ArrayList<Libro>();
+	static GestorBBDD BaseDeDatos = new GestorBBDD();
+	
 	static void run(Scanner scan) {
 				int opcion = 0;
 				do {
@@ -18,7 +22,7 @@ public class GestorLibros {
 					
 					switch (opcion) {
 					case Menu.INSERTAR_LIBRO:
-						
+						insertarLibro(scan);
 						break;
 					case Menu.ELIMINAR_LIBRO:
 						
@@ -34,5 +38,16 @@ public class GestorLibros {
 					}
 				} while (opcion!=Menu.SALIR);
 		}
+
+	private static void insertarLibro(Scanner scan) {
+			Libro libro = new Libro();
+			System.out.println("Ingrese el Titlulo: ");
+			libro.setTitulo(scan.nextLine());
+			System.out.println("Ingrese el Autor: ");
+			libro.setAutor(scan.nextLine());
+			System.out.println("Ingrese el Num de paginas: ");
+			libro.setNum_pag(Integer.parseInt(scan.nextLine()));
+			BaseDeDatos.insertarLibro(libro);
+	}
 }
 

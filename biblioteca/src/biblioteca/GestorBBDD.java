@@ -10,7 +10,21 @@ import java.util.Scanner;
 public class GestorBBDD extends Conector{
 	
 	public static void insertarLibro(Libro libro) {
-		
+		try {
+			Connection cn = conectar();
+			String consul = "INSERT INTO libros (titulo, autor,num_pag) VALUES (?, ?, ?)";
+			PreparedStatement st = cn.prepareStatement(consul);
+			st.setString(1,libro.getTitulo());
+			st.setString(2,libro.getAutor());
+			st.setInt(3,libro.getNum_pag());
+			st.executeUpdate();
+			st.close();
+			System.out.println("Libro Añadido \n de Titulo " + libro.getTitulo());
+			CERRAR();
+			
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 	}
 	public static void eliminarLibro(int id) {
 		
@@ -21,10 +35,6 @@ public class GestorBBDD extends Conector{
 	
 	public void modificarLibro(int id) {
 
-	}
-	
-	public static void verSocio() {
-	        
 	}
 
 	public static ArrayList<Socio> verSocios(ArrayList<Socio> socios) {
