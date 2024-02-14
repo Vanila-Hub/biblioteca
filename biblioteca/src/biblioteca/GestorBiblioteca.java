@@ -19,7 +19,7 @@ public class GestorBiblioteca {
 					opcion = Integer.parseInt(scan.nextLine());
 					switch (opcion) {
 					case Menu.GESTIONAR_LIBROS:
-						GestorLibros.run();
+						GestorLibros.run(scan);;
 						break;
 					case Menu.GESTIONAR_SOCIOS:
 						GestorSocios.run(scan);
