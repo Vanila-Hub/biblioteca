@@ -47,8 +47,6 @@ public class GestorSocios {
 		
 		int id = Integer.parseInt(scan.nextLine());
 		BaseDeDatos.modificarSocio(id,socios,scan);
-		
-		
 	}
 	private static void eliminarSocio(Scanner scan) {
 		System.out.println("Indoduzca el id del Socio a borrar: ");
