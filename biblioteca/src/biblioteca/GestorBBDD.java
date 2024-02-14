@@ -27,7 +27,18 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	public static void eliminarLibro(int id) {
-		
+		try {
+			String consul = "DELETE FROM libros WHERE Id = ?";
+			Connection cn = conectar();
+			PreparedStatement st = cn.prepareStatement(consul);
+			st.setInt(1, id);
+			st.executeUpdate();
+			st.close();
+			System.out.println("Libro con ID :" + id + " Eliminado!");
+			CERRAR();
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 	}
 	public Libro getLibro(int id) {
 		return null;

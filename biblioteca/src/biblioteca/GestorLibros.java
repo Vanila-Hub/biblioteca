@@ -28,17 +28,22 @@ public class GestorLibros {
 						
 						break;
 					case Menu.MODIFICAR_LIBRO:
-						
+						sliminarLibro(scan);
 						break;
 					case Menu.VER_LIBROS:
 						libros =  BaseDeDatos.verLibros(libros);
-						
 						break;
 					default:
 						break;
 					}
 				} while (opcion!=Menu.SALIR);
 		}
+
+	private static void sliminarLibro(Scanner scan) {
+		System.out.println("Indoduzca el id del Libro a borrar: ");
+		int id = Integer.parseInt(scan.nextLine());
+		BaseDeDatos.eliminarLibro(id);
+	}
 
 	private static void insertarLibro(Scanner scan) {
 			Libro libro = new Libro();
