@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 public class GestorSocios {
 	static ArrayList<Socio> socios = new ArrayList<Socio>();
+	static GestorBBDD BaseDeDatos = new GestorBBDD();
+	
+	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		run(scan);
@@ -28,10 +31,7 @@ public class GestorSocios {
 				eliminarSocio(scan);
 				break;
 			case Menu.VER_SOCIO:
-				socios = verSocios();
-				for (Socio socio : socios) {
-					System.out.println(socio.toString());
-				}
+				socios = BaseDeDatos.verSocios(socios);
 				break;
 			case Menu.MODIFICAR_SOCIO:
 				modificarSocio(scan);
@@ -46,57 +46,14 @@ public class GestorSocios {
 		System.out.println("Introduzca el ID de socio a Modifiar: ");
 		
 		int id = Integer.parseInt(scan.nextLine());
-		for (Socio socio : socios) {
-			if(socio.getId()==id) {
-				System.out.println("Ingrese Nuevo el Nombre para " + socio.getNombre() + ": ");
-				socio.setNombre(scan.nextLine());
-				System.out.println("Ingrese Nuevo el Apellido: ");
-				socio.setApellido(scan.nextLine());
-				System.out.println("Ingrese Nuevo el Direccion: ");
-				socio.setDireccion(scan.nextLine());
-				System.out.println("Ingrese Nuevo el Dni: ");
-				socio.setDni(scan.nextLine());
-				System.out.println("Ingrese Nuevo el Poblacion: ");
-				socio.setPoblacion(scan.nextLine());
-				System.out.println("Ingrese Nuevo el Provincia: ");
-				socio.setProvincia(scan.nextLine());
-				try {
-					Connection cn = Conector.conectar();
-					String consul = "UPDATE socios SET nombre = ?,apellido = ?, direccion = ?,poblacion = ?, provincia = ?, dni = ? WHERE socios.id = ?";
-					PreparedStatement st = cn.prepareStatement(consul);
-					st.setString(1, socio.getNombre());
-					st.setString(2, socio.getApellido());
-					st.setString(3, socio.getDireccion());
-					st.setString(4, socio.getPoblacion());
-					st.setString(5, socio.getProvincia());
-					st.setString(6, socio.getDni());
-					st.setInt(7, socio.getId());
-					st.executeUpdate();
-					st.close();
-					System.out.println("Socio Actualizado");
-					Conector.CERRAR();
-				} catch (Exception e) {
-					System.err.println(e);
-				}
-			}
-		}
+		BaseDeDatos.modificarSocio(id,socios,scan);
+		
 		
 	}
 	private static void eliminarSocio(Scanner scan) {
 		System.out.println("Indoduzca el id del Socio a borrar: ");
-		String id = scan.nextLine();
-		try {
-			String consul = "DELETE FROM Socios WHERE Id = ?";
-			Connection cn = Conector.conectar();
-			PreparedStatement st = cn.prepareStatement(consul);
-			st.setString(1, id);
-			st.executeUpdate();
-			st.close();
-			System.out.println("Socio con ID :" + id + " Eliminado!");
-			Conector.CERRAR();
-		} catch (Exception e) {
-			System.err.println(e);
-		}
+		int id = Integer.parseInt(scan.nextLine());
+		BaseDeDatos.eliminarSocio(id);
 	}
 	private static void insertarSocio(Scanner scan) {
 		
@@ -114,47 +71,9 @@ public class GestorSocios {
 		System.out.println("Ingrese el Provincia: ");
 		socio.setProvincia(scan.nextLine());
 		
-		try {
-			Connection cn = Conector.conectar();
-			String consul = "INSERT INTO socios (nombre, apellido,direccion, poblacion,provincia, dni) VALUES (?, ?, ?, ?, ?, ?)";
-			PreparedStatement st = cn.prepareStatement(consul);
-			st.setString(1,socio.getNombre());
-			st.setString(2,socio.getApellido());
-			st.setString(3,socio.getDireccion());
-			st.setString(4,socio.getPoblacion());
-			st.setString(5,socio.getProvincia());
-			st.setString(6,socio.getDni());
-			st.executeUpdate();
-			st.close();
-			System.out.println("Socio Añadido \n !Bienvenido! " + socio.getNombre());
-			Conector.CERRAR();
-			
-		} catch (Exception e) {
-			System.err.println(e);
-		}
+		BaseDeDatos.insertarSocio(socio);
+		
 	}
-	private static ArrayList<Socio> verSocios() {
-		ArrayList<Socio> socios = new ArrayList<Socio>();
-		try {
-			String consulta = "SELECT * FROM socios";
-			Connection cn = Conector.conectar();
-			Statement st = cn.createStatement();
-			ResultSet rs = st.executeQuery(consulta);
-			while (rs.next()) {
-				Socio socio = new Socio();
-				socio.setNombre(rs.getString("nombre"));
-				socio.setApellido(rs.getString("apellido"));
-				socio.setDireccion(rs.getString("direccion"));
-				socio.setDni(rs.getString("dni"));
-				socio.setId(rs.getInt("id"));
-				socio.setPoblacion(rs.getString("poblacion"));
-				socio.setProvincia(rs.getString("provincia"));
-				socios.add(socio);
-			}
-		} catch (Exception e) {
-			System.err.println(e);
-		}
-		return socios;
-	}
+
 }
 
