@@ -7,7 +7,7 @@ public class GestorLibros {
 
 	}
 
-	private static void run() {
+	static void run() {
 				int opcion = 0;
 				do {
 					Menu m = new Menu();
