@@ -42,7 +42,6 @@ public class GestorPrestamo {
 			}
 		} while (opcion!=Menu.SALIR);
 	}
-
 	private static void realizarPrestamos(Scanner scan) {
 		Prestamo prestamo = FormulariosdeDatos.pedirDatosPrestamo(scan);
 		baseDeDatos.realizarPrestamo(prestamo);
