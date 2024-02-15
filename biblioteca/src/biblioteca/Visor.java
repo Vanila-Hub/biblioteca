@@ -8,8 +8,8 @@ public class Visor {
 			System.out.println(libro.toString());
 		}
 	}
-	public static void mostrarLibro(Libro Libros) {
-		
+	public static void mostrarLibro(Libro Libro) {
+		System.out.println(Libro.toString());
 	}
 	public static void mostrarMensjae(String msg) {
 		

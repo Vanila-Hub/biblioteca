@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class GestorLibros {
 	static ArrayList<Libro> libros = new ArrayList<Libro>();
 	static GestorBBDD BaseDeDatos = new GestorBBDD();
-	
 	static void run(Scanner scan) {
 				int opcion = 0;
 				do {
@@ -34,25 +33,16 @@ public class GestorLibros {
 		}
 
 	private static void modificarLibro(Scanner scan) {
-		System.out.println("Introduzca el ID de socio a Modifiar: ");
-		int id = Integer.parseInt(scan.nextLine());
-		BaseDeDatos.modificarLibro(id,libros,scan);
+		FormulariosdeDatos.modificardatosLibro(libros, scan);
 	}
 
 	private static void eliminarLibro(Scanner scan) {
-		System.out.println("Indoduzca el id del Libro a borrar: ");
-		int id = Integer.parseInt(scan.nextLine());
+		int id = FormulariosdeDatos.pedirIdLibro(scan);
 		BaseDeDatos.eliminarLibro(id);
 	}
-
+	
 	private static void insertarLibro(Scanner scan) {
-			Libro libro = new Libro();
-			System.out.println("Ingrese el Titlulo: ");
-			libro.setTitulo(scan.nextLine());
-			System.out.println("Ingrese el Autor: ");
-			libro.setAutor(scan.nextLine());
-			System.out.println("Ingrese el Num de paginas: ");
-			libro.setNum_pag(Integer.parseInt(scan.nextLine()));
+			Libro libro = FormulariosdeDatos.pedirDtaosLibro(scan);
 			BaseDeDatos.insertarLibro(libro);
 	}
 }

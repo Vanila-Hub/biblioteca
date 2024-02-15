@@ -42,6 +42,8 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	public Libro getLibro(int id) {
+		String consul = "SELECT * FROM libros WHERE id = ?";
+		
 		return null;
 	}
 	
@@ -95,7 +97,6 @@ public class GestorBBDD extends Conector{
 		}
 		Visor.mostrarLibros(libros);
 		return libros;
-		
 	}
 	
 	public static ArrayList<Socio> verSocios(ArrayList<Socio> socios) {
