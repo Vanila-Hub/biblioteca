@@ -19,8 +19,8 @@ public class Visor {
 			System.out.println(socio.toString());
 		}
 	}
-	public static void mostrarSocio(String msg) {
-		
+	public static void mostrarSocio(Socio socio) {
+		System.out.println(socio.toString());
 	}
 	
 }

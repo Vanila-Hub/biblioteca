@@ -43,33 +43,15 @@ public class GestorSocios {
 	}
 	
 	private static void modificarSocio(Scanner scan) {
-		System.out.println("Introduzca el ID de socio a Modifiar: ");
-		
-		int id = Integer.parseInt(scan.nextLine());
-		BaseDeDatos.modificarSocio(id,socios,scan);
+		FormulariosdeDatos.modificardatosSocio(socios, scan);
 	}
 	private static void eliminarSocio(Scanner scan) {
-		System.out.println("Indoduzca el id del Socio a borrar: ");
-		int id = Integer.parseInt(scan.nextLine());
+		int id = FormulariosdeDatos.pedirIdSocio(scan);
 		BaseDeDatos.eliminarSocio(id);
 	}
 	private static void insertarSocio(Scanner scan) {
-		
-		Socio socio = new Socio();
-		System.out.println("Ingrese el Nombre: ");
-		socio.setNombre(scan.nextLine());
-		System.out.println("Ingrese el Apellido: ");
-		socio.setApellido(scan.nextLine());
-		System.out.println("Ingrese el Direccion: ");
-		socio.setDireccion(scan.nextLine());
-		System.out.println("Ingrese el Dni: ");
-		socio.setDni(scan.nextLine());
-		System.out.println("Ingrese el Poblacion: ");
-		socio.setPoblacion(scan.nextLine());
-		System.out.println("Ingrese el Provincia: ");
-		socio.setProvincia(scan.nextLine());
+		Socio socio = FormulariosdeDatos.pedirDtaosSocio(scan);
 		BaseDeDatos.insertarSocio(socio);
-		
 	}
 
 }
