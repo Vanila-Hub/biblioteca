@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorSocios {
-	static ArrayList<Socio> socios = new ArrayList<Socio>();
-	static GestorBBDD BaseDeDatos = new GestorBBDD();
+	private static ArrayList<Socio> socios = new ArrayList<Socio>();
+	private static GestorBBDD BaseDeDatos = new GestorBBDD();
 	
 	
 	public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class GestorSocios {
 				eliminarSocio(scan);
 				break;
 			case Menu.VER_SOCIO:
-				socios = BaseDeDatos.verSocios(socios);
+				verSocio(scan);
 				break;
 			case Menu.MODIFICAR_SOCIO:
 				modificarSocio(scan);
@@ -42,6 +42,9 @@ public class GestorSocios {
 		} while (opcion!=Menu.SALIR);
 	}
 	
+	public static void verSocio(Scanner scan) {
+		socios = BaseDeDatos.verSocios(socios);		
+	}
 	private static void modificarSocio(Scanner scan) {
 		FormulariosdeDatos.modificardatosSocio(socios, scan);
 	}

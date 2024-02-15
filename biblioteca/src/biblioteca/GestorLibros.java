@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorLibros {
-	static ArrayList<Libro> libros = new ArrayList<Libro>();
-	static GestorBBDD BaseDeDatos = new GestorBBDD();
+	private static ArrayList<Libro> libros = new ArrayList<Libro>();
+	private static GestorBBDD BaseDeDatos = new GestorBBDD();
 	static void run(Scanner scan) {
 				int opcion = 0;
 				do {
@@ -24,13 +24,17 @@ public class GestorLibros {
 						modificarLibro(scan);
 						break;
 					case Menu.VER_LIBROS:
-						libros =  BaseDeDatos.verLibros(libros);
+						verLibros(scan);
 						break;
 					default:
 						break;
 					}
 				} while (opcion!=Menu.SALIR);
 		}
+
+	public static void verLibros(Scanner scan) {
+		libros =  BaseDeDatos.verLibros(libros);		
+	}
 
 	private static void modificarLibro(Scanner scan) {
 		FormulariosdeDatos.modificardatosLibro(libros, scan);

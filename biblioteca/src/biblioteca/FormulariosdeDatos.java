@@ -1,5 +1,6 @@
 package biblioteca;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,6 +48,7 @@ public class FormulariosdeDatos {
 		socio.setProvincia(scan.nextLine());
 		return socio;
 	}
+	
 	public static void  modificardatosSocio(ArrayList<Socio> socios,Scanner scan) {
 		int id = pedirIdSocio(scan);
 		for (Socio socio : socios) {
@@ -56,10 +58,23 @@ public class FormulariosdeDatos {
 		}
 		BaseDeDatos.modificarSocio(id,socios,scan);
 	}
+	
 	public static int pedirIdSocio(Scanner scan) {
 		System.out.println("Introduzca el ID de Socio: ");
 		int id = Integer.parseInt(scan.nextLine());
 		return id;
+	}
+	
+	public static Prestamo pedirDatosPrestamo(Scanner scan) {
+		Prestamo prestamo = new Prestamo();
+		int id_Libro = pedirIdLibro(scan);
+		int id_Socio =  pedirIdSocio(scan);
+		LocalDate fechaActual = LocalDate.now();
+		prestamo.setId_Libro(id_Libro);
+		prestamo.setId_socio(id_Socio);
+		prestamo.setFecha(fechaActual);
+		prestamo.setDevuelto(false);
+		return prestamo;
 	}
 }
 

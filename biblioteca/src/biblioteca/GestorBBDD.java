@@ -1,6 +1,7 @@
 package biblioteca;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -196,8 +197,23 @@ public class GestorBBDD extends Conector{
 		}
 	}
 
-	 public static void realizarPrestamo() {
-	        
+	 public void realizarPrestamo(Prestamo prestamo) {
+			try {
+				Connection cn = conectar();
+				String consul = "INSERT INTO prestamos (id_libro, id_socio, fecha, devuelto) VALUES (?, ?, ?, ?);";
+				PreparedStatement st = cn.prepareStatement(consul);
+				st.setInt(1,prestamo.getId_Libro());
+				st.setInt(2,prestamo.getId_socio());
+				st.setDate(2,prestamo.getFecha());
+				st.setBoolean(3,prestamo.isDevuelto());
+				st.executeUpdate();
+				st.close();
+				System.out.println("Prestamo Añadido");
+				CERRAR();
+				
+			} catch (Exception e) {
+				System.err.println(e);
+			}
 	 }
 }
 
