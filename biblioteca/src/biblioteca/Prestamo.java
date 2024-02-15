@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class Prestamo {
 	private int id_Libro = 0;
 	private int id_socio = 0;
-	private LocalDate fecha;
+	private String fecha;
 	private boolean devuelto= false;
 	
 	 public void setId_Libro(int id_Libro) {
@@ -17,7 +17,7 @@ public class Prestamo {
 	        this.id_socio = id_socio;
 	    }
 	    
-	    public void setFecha(LocalDate fechaActual) {
+	    public void setFecha(String fechaActual) {
 	        this.fecha = fechaActual;
 	    }
 	    
@@ -34,8 +34,8 @@ public class Prestamo {
 	        return id_socio;
 	    }
 	    
-	    public Date getFecha() {
-	        return Date.valueOf(fecha);
+	    public String getFecha() {
+	        return fecha;
 	    }
 	    
 	    public boolean isDevuelto() {

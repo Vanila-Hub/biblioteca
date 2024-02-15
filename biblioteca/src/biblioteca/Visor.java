@@ -23,4 +23,9 @@ public class Visor {
 		System.out.println(socio.toString());
 	}
 	
+	public static void mostrarPrestamosNoDevueltos(ArrayList<Prestamo> prestamos) {
+		for (Prestamo prestamo : prestamos) {
+			System.out.println(prestamo.toString());
+		}
+	}
 }

@@ -204,8 +204,8 @@ public class GestorBBDD extends Conector{
 				PreparedStatement st = cn.prepareStatement(consul);
 				st.setInt(1,prestamo.getId_Libro());
 				st.setInt(2,prestamo.getId_socio());
-				st.setDate(2,prestamo.getFecha());
-				st.setBoolean(3,prestamo.isDevuelto());
+				st.setDate(3,Date.valueOf(prestamo.getFecha()));
+				st.setBoolean(4,prestamo.isDevuelto());
 				st.executeUpdate();
 				st.close();
 				System.out.println("Prestamo Añadido");
@@ -215,5 +215,40 @@ public class GestorBBDD extends Conector{
 				System.err.println(e);
 			}
 	 }
+
+		public static void eliminarPrestamo(int id) {
+			try {
+				String consul = "DELETE FROM prestamos WHERE id_libro = ?";
+				Connection cn = conectar();
+				PreparedStatement st = cn.prepareStatement(consul);
+				st.setInt(1, id);
+				st.executeUpdate();
+				st.close();
+				System.out.println("Prestamo con Libro de ID " + id + " Devuelto!");
+				Conector.CERRAR();
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+		 }
+		
+		public void PresNoDevueltos(Scanner scan, ArrayList<Prestamo> prestamos) {
+			try {
+				String consulta = "SELECT * FROM prestamos WHERE devuelto=0";
+				Connection cn = Conector.conectar();
+				Statement st = cn.createStatement();
+				ResultSet rs = st.executeQuery(consulta);
+				while (rs.next()) {
+					Prestamo prestamo = new Prestamo();
+					prestamo.setDevuelto(rs.getBoolean("devuelto"));
+					prestamo.setFecha(String.valueOf(rs.getDate("fecha")));
+					prestamo.setId_Libro(rs.getInt("id_libro"));
+					prestamo.setId_socio(rs.getInt("id_socio"));
+					prestamos.add(prestamo);
+				}
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+			Visor.mostrarPrestamosNoDevueltos(prestamos);
+		 }
 }
 

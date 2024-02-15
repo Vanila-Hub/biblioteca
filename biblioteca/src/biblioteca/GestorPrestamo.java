@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class GestorPrestamo {
 	private static ArrayList<Libro> libros = new ArrayList<Libro>();
 	private static ArrayList<Socio> socios = new ArrayList<Socio>();
+	private static ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 	private Socio socio = new Socio();
 	private Libro libro = new Libro();
 	private static GestorBBDD baseDeDatos = new GestorBBDD();
@@ -26,10 +27,10 @@ public class GestorPrestamo {
 				realizarPrestamos(scan);
 				break;
 			case Menu.DEVOLVER_LIBRO:
-				
+				devolverLibro(scan);
 				break;
 			case Menu.CONSUL_PREST_NO_DEVUELTOS:
-				
+				noDevueltos(scan);
 				break;
 			case Menu.CONSUL_PRES_SOCIO:
 				
@@ -42,6 +43,16 @@ public class GestorPrestamo {
 			}
 		} while (opcion!=Menu.SALIR);
 	}
+	
+	private static void noDevueltos(Scanner scan) {
+		baseDeDatos.PresNoDevueltos(scan,prestamos);
+	}
+
+	private static void devolverLibro(Scanner scan) {
+		int id = FormulariosdeDatos.pedirIdLibro(scan);
+		baseDeDatos.eliminarPrestamo(id);
+	}
+
 	private static void realizarPrestamos(Scanner scan) {
 		Prestamo prestamo = FormulariosdeDatos.pedirDatosPrestamo(scan);
 		baseDeDatos.realizarPrestamo(prestamo);

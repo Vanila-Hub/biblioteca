@@ -1,5 +1,6 @@
 package biblioteca;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -69,7 +70,7 @@ public class FormulariosdeDatos {
 		Prestamo prestamo = new Prestamo();
 		int id_Libro = pedirIdLibro(scan);
 		int id_Socio =  pedirIdSocio(scan);
-		LocalDate fechaActual = LocalDate.now();
+		String fechaActual = String.valueOf(LocalDate.now());
 		prestamo.setId_Libro(id_Libro);
 		prestamo.setId_socio(id_Socio);
 		prestamo.setFecha(fechaActual);
