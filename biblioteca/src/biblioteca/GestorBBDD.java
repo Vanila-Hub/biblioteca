@@ -217,10 +217,11 @@ public class GestorBBDD extends Conector{
 
 		public static void eliminarPrestamo(int id) {
 			try {
-				String consul = "DELETE FROM prestamos WHERE id_libro = ?";
+				String consul = "UPDATE prestamos A SET A.devuelto = ? WHERE A.id_libro = ?";
 				Connection cn = conectar();
 				PreparedStatement st = cn.prepareStatement(consul);
-				st.setInt(1, id);
+				st.setInt(1, 1);
+				st.setInt(2, id);
 				st.executeUpdate();
 				st.close();
 				System.out.println("Prestamo con Libro de ID " + id + " Devuelto!");
@@ -230,7 +231,8 @@ public class GestorBBDD extends Conector{
 			}
 		 }
 		
-		public void PresNoDevueltos(Scanner scan, ArrayList<Prestamo> prestamos) {
+		public void PresNoDevueltos(Scanner scan) {
+			ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 			try {
 				String consulta = "SELECT * FROM prestamos WHERE devuelto=0";
 				Connection cn = Conector.conectar();
@@ -250,7 +252,8 @@ public class GestorBBDD extends Conector{
 			Visor.mostrarPrestamosNoDevueltos(prestamos);
 		 }
 
-		public void PresDeSocio(Scanner scan, ArrayList<Prestamo> prestamos) {
+		public void PresDeSocio(Scanner scan) {
+			ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 			try {
 				int id = FormulariosdeDatos.pedirIdSocio(scan);
 				String consulta = "SELECT * FROM prestamos WHERE id_socio="+id;
@@ -273,7 +276,8 @@ public class GestorBBDD extends Conector{
 		public void ConsulDispoLibro(Scanner scan) {
 			ArrayList<Libro> libros= new ArrayList<Libro>();
 			String consul = "SELECT * FROM libros A WHERE NOT EXISTS(SELECT * FROM prestamos B WHERE A.id = B.id_libro)";
-			System.out.println("Estos Son los libros que no han sido prestados ningun socio");
+			System.out.println("Libros no prestados ningun socio:");
+			System.out.print("\t");
 			verLibros(libros, consul);
 		}
 	}

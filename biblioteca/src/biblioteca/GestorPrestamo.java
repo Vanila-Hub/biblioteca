@@ -45,12 +45,11 @@ public class GestorPrestamo {
 	}
 
 	private static void presSocios(Scanner scan) {
-		baseDeDatos.PresDeSocio(scan,prestamos);
-		
+		baseDeDatos.PresDeSocio(scan);
 	}
 
 	private static void noDevueltos(Scanner scan) {
-		baseDeDatos.PresNoDevueltos(scan,prestamos);
+		baseDeDatos.PresNoDevueltos(scan);
 	}
 
 	private static void devolverLibro(Scanner scan) {
