@@ -78,10 +78,9 @@ public class GestorBBDD extends Conector{
 		}
 	}
 
-	public static ArrayList<Libro> verLibros(ArrayList<Libro> libros){
+	public ArrayList<Libro> verLibros(ArrayList<Libro> libros,String consulta){
 		libros = new ArrayList<Libro>();
 		try {
-			String consulta = "SELECT * FROM libros";
 			Connection cn = conectar();
 			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery(consulta);
@@ -250,10 +249,11 @@ public class GestorBBDD extends Conector{
 			}
 			Visor.mostrarPrestamosNoDevueltos(prestamos);
 		 }
-		
+
 		public void PresDeSocio(Scanner scan, ArrayList<Prestamo> prestamos) {
 			try {
-				String consulta = "SELECT * FROM prestamos WHERE id_socio=";
+				int id = FormulariosdeDatos.pedirIdSocio(scan);
+				String consulta = "SELECT * FROM prestamos WHERE id_socio="+id;
 				Connection cn = Conector.conectar();
 				Statement st = cn.createStatement();
 				ResultSet rs = st.executeQuery(consulta);
@@ -268,7 +268,30 @@ public class GestorBBDD extends Conector{
 			} catch (Exception e) {
 				System.err.println(e);
 			}
-			Visor.mostrarPrestamosNoDevueltos(prestamos);
+			Visor.mostrarPrestamosSocio(prestamos);
 		 }
-}
-
+		public void ConsulDispoLibro(Scanner scan) {
+			
+			int opcion;
+			Menu menu = new Menu();
+			menu.mostrarMenuDisponibilidad();
+			opcion =Integer.parseInt(scan.nextLine());
+			switch (opcion) {
+			case Menu.CONSULTAR_DISPONIBILIDAD_DE_UN_LIBRO_POR_ID:
+				ArrayList<Libro>libros= new ArrayList<Libro>();
+				int id = FormulariosdeDatos.pedirIdLibro(scan);
+				String consul = "SELECT * FROM libros A INNER JOIN prestamos B ON A.id=B.id_libro WHERE B.devuelto=FALSE and A.id ="+id;
+				verLibros(libros, consul);
+				break;
+				
+			case Menu.CONSULTAR_LIBRO_POR_TITULO:
+				libros= new ArrayList<Libro>();
+				String titulo = FormulariosdeDatos.pedirTituloLibro(scan);
+				consul = "SELECT * FROM libros A INNER JOIN prestamos B ON A.id=B.id_libro WHERE B.devuelto=FALSE and A.titulo =" + titulo;
+				verLibros(libros, consul);
+				break;
+			default:
+				break;
+			}
+		}
+	}

@@ -25,7 +25,7 @@ public class GestorBiblioteca {
 						GestorSocios.run(scan);
 						break;
 					case Menu.GESTIONAR_PRESTAMOS:
-						m.mostrarMenuPrestamos();
+						GestorPrestamo.run(scan);
 						break;
 					default:
 						break;

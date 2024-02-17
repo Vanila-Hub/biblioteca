@@ -10,12 +10,7 @@ import java.util.Scanner;
 public class GestorSocios {
 	private static ArrayList<Socio> socios = new ArrayList<Socio>();
 	private static GestorBBDD BaseDeDatos = new GestorBBDD();
-	
-	
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		run(scan);
-	}
+
 	public static void run(Scanner scan) {
 		int opcion = 0;
 		do {

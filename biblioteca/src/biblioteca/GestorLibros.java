@@ -33,7 +33,8 @@ public class GestorLibros {
 		}
 
 	public static void verLibros(Scanner scan) {
-		libros =  BaseDeDatos.verLibros(libros);		
+		String consulta = "SELECT * FROM libros";
+		libros =  BaseDeDatos.verLibros(libros,consulta);		
 	}
 
 	private static void modificarLibro(Scanner scan) {

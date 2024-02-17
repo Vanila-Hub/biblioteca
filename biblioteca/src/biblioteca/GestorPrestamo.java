@@ -10,17 +10,13 @@ public class GestorPrestamo {
 	private Socio socio = new Socio();
 	private Libro libro = new Libro();
 	private static GestorBBDD baseDeDatos = new GestorBBDD();
-	
-	static Scanner scan = new Scanner(System.in);
-	public static void main(String[] args) {
-		run(scan);
-	}
 
-	private static void run(Scanner scan) {
-		int opcion = 0;
+	public static void run(Scanner scan) {
+		int opcion=3;
 		do {
 			Menu m = new Menu();
 			m.mostrarMenuPrestamos();
+			
 			opcion = Integer.parseInt(scan.nextLine());
 			switch (opcion) {
 			case Menu.REALIZAR_PRESTAMO:
@@ -33,10 +29,10 @@ public class GestorPrestamo {
 				noDevueltos(scan);
 				break;
 			case Menu.CONSUL_PRES_SOCIO:
-				
+				presSocios(scan);
 				break;
 			case Menu.CONSULTAR_DISPONIBILIDAD_LIBRO:
-				
+				consultarDisponiLibro(scan);
 				break;
 			default:
 				break;
@@ -44,6 +40,15 @@ public class GestorPrestamo {
 		} while (opcion!=Menu.SALIR);
 	}
 	
+	private static void consultarDisponiLibro(Scanner scan) {
+		baseDeDatos.ConsulDispoLibro(scan);
+	}
+
+	private static void presSocios(Scanner scan) {
+		baseDeDatos.PresDeSocio(scan,prestamos);
+		
+	}
+
 	private static void noDevueltos(Scanner scan) {
 		baseDeDatos.PresNoDevueltos(scan,prestamos);
 	}

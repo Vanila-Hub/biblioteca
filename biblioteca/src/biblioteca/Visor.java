@@ -28,4 +28,9 @@ public class Visor {
 			System.out.println(prestamo.toString());
 		}
 	}
+	public static void mostrarPrestamosSocio(ArrayList<Prestamo> prestamos) {
+			for (Prestamo prestamo : prestamos) {
+				System.out.println(prestamo.toString());
+			}
+	}
 }

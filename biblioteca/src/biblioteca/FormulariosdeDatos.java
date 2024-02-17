@@ -33,6 +33,18 @@ public class FormulariosdeDatos {
 		return id;
 	}
 	
+	public static String pedirTituloLibro(Scanner scan) {
+		System.out.println("Introduzca el titulo de Libro: ");
+		String titulo =scan.nextLine();
+		return titulo;
+	}
+	
+	public static String pedirAutorLibro(Scanner scan) {
+		System.out.println("Introduzca el Autor de Libro: ");
+		String autor =scan.nextLine();
+		return autor;
+	}
+	
 	public static Socio  pedirDtaosSocio(Scanner scan) {
 		Socio socio = new Socio();
 		System.out.println("Ingrese el Nombre: ");
