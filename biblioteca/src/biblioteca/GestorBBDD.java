@@ -271,27 +271,9 @@ public class GestorBBDD extends Conector{
 			Visor.mostrarPrestamosSocio(prestamos);
 		 }
 		public void ConsulDispoLibro(Scanner scan) {
-			
-			int opcion;
-			Menu menu = new Menu();
-			menu.mostrarMenuDisponibilidad();
-			opcion =Integer.parseInt(scan.nextLine());
-			switch (opcion) {
-			case Menu.CONSULTAR_DISPONIBILIDAD_DE_UN_LIBRO_POR_ID:
-				ArrayList<Libro>libros= new ArrayList<Libro>();
-				int id = FormulariosdeDatos.pedirIdLibro(scan);
-				String consul = "SELECT * FROM libros A INNER JOIN prestamos B ON A.id=B.id_libro WHERE B.devuelto=FALSE and A.id ="+id;
-				verLibros(libros, consul);
-				break;
-				
-			case Menu.CONSULTAR_LIBRO_POR_TITULO:
-				libros= new ArrayList<Libro>();
-				String titulo = FormulariosdeDatos.pedirTituloLibro(scan);
-				consul = "SELECT * FROM libros A INNER JOIN prestamos B ON A.id=B.id_libro WHERE B.devuelto=FALSE and A.titulo =" + titulo;
-				verLibros(libros, consul);
-				break;
-			default:
-				break;
-			}
+			ArrayList<Libro> libros= new ArrayList<Libro>();
+			String consul = "SELECT * FROM libros A WHERE NOT EXISTS(SELECT * FROM prestamos B WHERE A.id = B.id_libro)";
+			System.out.println("Estos Son los libros que no han sido prestados ningun socio");
+			verLibros(libros, consul);
 		}
 	}

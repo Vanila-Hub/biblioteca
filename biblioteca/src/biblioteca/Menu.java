@@ -22,10 +22,6 @@ package biblioteca;
         public static final int CONSUL_PREST_NO_DEVUELTOS = 3;
         public static final int CONSUL_PRES_SOCIO = 4;
         public static final int CONSULTAR_DISPONIBILIDAD_LIBRO = 5;
-        
-        public static final int CONSULTAR_DISPONIBILIDAD_DE_UN_LIBRO_POR_ID = 1;
-        public static final int CONSULTAR_LIBRO_POR_TITULO = 2;
-        public static final int CONSULTAR_LIBRO_POR_AUTOR = 3;
 
         public Menu() {
 			// TODO Auto-generated constructor stub
@@ -64,12 +60,6 @@ package biblioteca;
         	System.out.println(CONSULTAR_DISPONIBILIDAD_LIBRO + ". Consultar disponibilidad de un libro");
             System.out.println(SALIR + ". Salir");
         }
-        
-        public void mostrarMenuDisponibilidad() {
-        	   System.out.println("Seleccione una opción:");
-               System.out.println(CONSULTAR_DISPONIBILIDAD_DE_UN_LIBRO_POR_ID + " Consultar disponibilidad de un libro por ID");
-               System.out.println(CONSULTAR_LIBRO_POR_TITULO + " Consultar disponibilidad de un libro por Titulo");
-               System.out.println(SALIR + ". Salir");
-        }
+
 
 }
