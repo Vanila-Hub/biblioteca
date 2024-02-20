@@ -7,7 +7,7 @@ public class CompararAscen implements Comparator<Libro>{
 
 	@Override
 	public int compare(Libro o1, Libro o2) {
-		return o2.getTitulo().compareTo(o1.getAutor());
+		return o1.getTitulo().compareTo(o2.getAutor());
 	}
 
 }

@@ -47,4 +47,5 @@ public class Visor {
 			}
 			System.out.print("\n");
 	}
+
 }
