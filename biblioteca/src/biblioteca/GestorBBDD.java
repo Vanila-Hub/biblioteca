@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -215,16 +216,20 @@ public class GestorBBDD extends Conector{
 			}
 	 }
 
-		public static void eliminarPrestamo(int id) {
+		public static void eliminarPrestamo(Scanner scan) {
+			Libro libro = new Libro();
+			String tituloLibro = FormulariosdeDatos.pedirTituloLibro(scan);
+			libro = getLibroTitulo(tituloLibro);
+			
 			try {
 				String consul = "UPDATE prestamos A SET A.devuelto = ? WHERE A.id_libro = ?";
 				Connection cn = conectar();
 				PreparedStatement st = cn.prepareStatement(consul);
 				st.setInt(1, 1);
-				st.setInt(2, id);
+				st.setInt(2, libro.getId());
 				st.executeUpdate();
 				st.close();
-				System.out.println("Prestamo con Libro de ID " + id + " Devuelto!");
+				System.out.println("Prestamo del Libro " + libro.getTitulo() + " Devuelto!");
 				Conector.CERRAR();
 			} catch (Exception e) {
 				System.err.println(e);
@@ -254,30 +259,102 @@ public class GestorBBDD extends Conector{
 
 		public void PresDeSocio(Scanner scan) {
 			ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+			ArrayList<Libro> libros = new ArrayList<Libro>();
 			try {
-				int id = FormulariosdeDatos.pedirIdSocio(scan);
-				String consulta = "SELECT * FROM prestamos WHERE id_socio="+id;
+				String dniSocio = FormulariosdeDatos.pedirDNISocio(scan);
+				Socio socio = new Socio();
+				socio = getSocioDNI(dniSocio);
+				
+				String consulta = "SELECT * FROM prestamos WHERE id_socio=? ";
 				Connection cn = Conector.conectar();
-				Statement st = cn.createStatement();
-				ResultSet rs = st.executeQuery(consulta);
+				PreparedStatement st = cn.prepareStatement(consulta);
+				st.setInt(1, socio.getId());
+				ResultSet rs = st.executeQuery();
 				while (rs.next()) {
 					Prestamo prestamo = new Prestamo();
 					prestamo.setDevuelto(rs.getBoolean("devuelto"));
 					prestamo.setFecha(String.valueOf(rs.getDate("fecha")));
 					prestamo.setId_Libro(rs.getInt("id_libro"));
 					prestamo.setId_socio(rs.getInt("id_socio"));
+					libros = getLibroId(prestamo.getId_Libro(),libros);
 					prestamos.add(prestamo);
 				}
 			} catch (Exception e) {
 				System.err.println(e);
 			}
+			libros.sort(new CompararAscen());
+			Visor.mostrarLibros(libros);
 			Visor.mostrarPrestamosSocio(prestamos);
 		 }
 		public void ConsulDispoLibro(Scanner scan) {
 			ArrayList<Libro> libros= new ArrayList<Libro>();
 			String consul = "SELECT * FROM libros A WHERE NOT EXISTS(SELECT * FROM prestamos B WHERE A.id = B.id_libro)";
-			System.out.println("Libros no prestados ningun socio:");
+			System.out.println("Libros no prestados a ningun socio:");
 			System.out.print("\t");
 			verLibros(libros, consul);
+		}
+
+		public static Socio getSocioDNI(String dniSocio) {
+			String sql = "SELECT * FROM socios WHERE dni = ?";
+			Socio socio = new Socio();
+			Connection cn = Conector.conectar();
+			try {
+				PreparedStatement st = cn.prepareStatement(sql);
+				st.setString(1, dniSocio);
+				ResultSet rs = st.executeQuery();
+				while (rs.next()) {
+					socio.setNombre(rs.getString("nombre"));
+					socio.setApellido(rs.getString("apellido"));
+					socio.setDireccion(rs.getString("direccion"));
+					socio.setDni(rs.getString("dni"));
+					socio.setId(rs.getInt("id"));
+					socio.setPoblacion(rs.getString("poblacion"));
+					socio.setProvincia(rs.getString("provincia"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return socio;
+		}
+
+		public static Libro getLibroTitulo(String tituloLibro) {
+			String sql = "SELECT * FROM libros WHERE titulo = ?";
+			Libro libro = new Libro();
+			Connection cn = Conector.conectar();
+			try {
+				PreparedStatement st = cn.prepareStatement(sql);
+				st.setString(1, tituloLibro);
+				ResultSet rs = st.executeQuery();
+				while (rs.next()) {
+					libro.setAutor(rs.getString("autor"));
+					libro.setTitulo(rs.getString("titulo"));
+					libro.setId(rs.getInt("id"));
+					libro.setNum_pag(rs.getInt("num_pag"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return libro;
+		}
+		
+		public static ArrayList<Libro> getLibroId(int id, ArrayList<Libro> libros) {
+			String sql = "SELECT * FROM libros WHERE id = ?";
+			Connection cn = Conector.conectar();
+			try {
+				PreparedStatement st = cn.prepareStatement(sql);
+				st.setInt(1, id);
+				ResultSet rs = st.executeQuery();
+				while (rs.next()) {
+					Libro libro = new Libro();
+					libro.setAutor(rs.getString("autor"));
+					libro.setTitulo(rs.getString("titulo"));
+					libro.setId(rs.getInt("id"));
+					libro.setNum_pag(rs.getInt("num_pag"));
+					libros.add(libro);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return libros;
 		}
 	}

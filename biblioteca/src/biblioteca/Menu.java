@@ -22,6 +22,9 @@ package biblioteca;
         public static final int CONSUL_PREST_NO_DEVUELTOS = 3;
         public static final int CONSUL_PRES_SOCIO = 4;
         public static final int CONSULTAR_DISPONIBILIDAD_LIBRO = 5;
+        
+        public static final int PRESTAMO_POR_ID = 1;
+        public static final int PRESTAMO_POR_TITULO_DNI = 2;
 
         public Menu() {
 			// TODO Auto-generated constructor stub
@@ -61,5 +64,11 @@ package biblioteca;
             System.out.println(SALIR + ". Salir");
         }
 
+        public void mostrarOpcionesPrestamo() {
+        	System.out.println("Seleccione una opción:");
+        	System.out.println(PRESTAMO_POR_ID + ". Realizar préstamo por Id de Libro e Id de Socio");
+        	System.out.println(PRESTAMO_POR_TITULO_DNI + ".  Realizar préstamo por titulo de Libro y el DNI de Socio");
+            System.out.println(SALIR + ". Salir");
+        }
 
 }

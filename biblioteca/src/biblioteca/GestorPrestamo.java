@@ -53,8 +53,7 @@ public class GestorPrestamo {
 	}
 
 	private static void devolverLibro(Scanner scan) {
-		int id = FormulariosdeDatos.pedirIdLibro(scan);
-		baseDeDatos.eliminarPrestamo(id);
+		baseDeDatos.eliminarPrestamo(scan);
 	}
 
 	private static void realizarPrestamos(Scanner scan) {

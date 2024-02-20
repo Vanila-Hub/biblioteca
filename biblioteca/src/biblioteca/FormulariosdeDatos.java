@@ -80,14 +80,48 @@ public class FormulariosdeDatos {
 	
 	public static Prestamo pedirDatosPrestamo(Scanner scan) {
 		Prestamo prestamo = new Prestamo();
-		int id_Libro = pedirIdLibro(scan);
-		int id_Socio =  pedirIdSocio(scan);
-		String fechaActual = String.valueOf(LocalDate.now());
-		prestamo.setId_Libro(id_Libro);
-		prestamo.setId_socio(id_Socio);
-		prestamo.setFecha(fechaActual);
-		prestamo.setDevuelto(false);
+		Menu m = new Menu();
+		m.mostrarOpcionesPrestamo();
+		int opcion = Integer.parseInt(scan.nextLine());
+		
+		switch (opcion) {
+		case Menu.PRESTAMO_POR_ID:
+			int id_Libro = pedirIdLibro(scan);
+			int id_Socio =  pedirIdSocio(scan);
+			String fechaActual = String.valueOf(LocalDate.now());
+			prestamo.setId_Libro(id_Libro);
+			prestamo.setId_socio(id_Socio);
+			prestamo.setFecha(fechaActual);
+			prestamo.setDevuelto(false);
+			break;
+			
+		case Menu.PRESTAMO_POR_TITULO_DNI:
+			Socio socio = new Socio();
+			Libro libro = new Libro();
+			String dniSocio = pedirDNISocio(scan);
+			String tituloLibro = pedirTituloLibro(scan);
+			
+			socio = GestorBBDD.getSocioDNI(dniSocio);
+			libro = GestorBBDD.getLibroTitulo(tituloLibro);
+			
+			int idLibro = libro.getId();
+			int idSocio =  socio.getId();
+			
+			String fecha_Actual = String.valueOf(LocalDate.now());
+			prestamo.setId_Libro(idLibro);
+			prestamo.setId_socio(idSocio);
+			prestamo.setFecha(fecha_Actual);
+			prestamo.setDevuelto(false);
+			break;
+		default:
+			break;
+		}
 		return prestamo;
+	}
+	public static String pedirDNISocio(Scanner scan) {
+		System.out.println("Introduzca el Dni del Socio: ");
+		String socio =scan.nextLine();
+		return socio;
 	}
 }
 
