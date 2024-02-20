@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GestorLibros {
 	private static ArrayList<Libro> libros = new ArrayList<Libro>();
-	private static GestorBBDD BaseDeDatos = new GestorBBDD();
+	private static GestorBBDD baseDeDatos = new GestorBBDD();
 	static void run(Scanner scan) {
 				int opcion = 0;
 				do {
@@ -34,7 +34,7 @@ public class GestorLibros {
 
 	public static void verLibros(Scanner scan) {
 		String consulta = "SELECT * FROM libros";
-		libros =  BaseDeDatos.verLibros(libros,consulta);		
+		libros =  baseDeDatos.verLibros(libros,consulta);		
 	}
 
 	private static void modificarLibro(Scanner scan) {
@@ -43,12 +43,12 @@ public class GestorLibros {
 
 	private static void eliminarLibro(Scanner scan) {
 		int id = FormulariosdeDatos.pedirIdLibro(scan);
-		BaseDeDatos.eliminarLibro(id);
+		baseDeDatos.eliminarLibro(id);
 	}
 	
 	private static void insertarLibro(Scanner scan) {
 			Libro libro = FormulariosdeDatos.pedirDtaosLibro(scan);
-			BaseDeDatos.insertarLibro(libro);
+			baseDeDatos.insertarLibro(libro);
 	}
 }
 
