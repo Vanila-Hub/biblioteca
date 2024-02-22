@@ -9,7 +9,6 @@ public class GestorBiblioteca {
 	}
 
 	private static void run() {
-
 				int opcion;
 				Scanner scan = new Scanner(System.in);
 				do {
