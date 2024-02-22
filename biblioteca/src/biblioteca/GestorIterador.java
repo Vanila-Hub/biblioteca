@@ -9,6 +9,7 @@ public class GestorIterador {
 	}
 
 	public void iterar(ArrayList<Libro> libros, String titLibro) {
+		titLibro = titLibro.toUpperCase();
 		for (Iterator iterator = libros.iterator(); iterator.hasNext();) {
 			Libro libro = (Libro) iterator.next();
 			
