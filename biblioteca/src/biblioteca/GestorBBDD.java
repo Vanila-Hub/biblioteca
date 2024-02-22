@@ -43,11 +43,6 @@ public class GestorBBDD extends Conector{
 			System.err.println(e);
 		}
 	}
-	public Libro getLibro(int id) {
-		String consul = "SELECT * FROM libros WHERE id = ?";
-		
-		return null;
-	}
 	
 	public void modificarLibro(int id,ArrayList<Libro> libros,Scanner scan) {
 		for (Libro libro : libros) {
@@ -202,8 +197,8 @@ public class GestorBBDD extends Conector{
 				Connection cn = conectar();
 				String consul = "INSERT INTO prestamos (id_libro, id_socio, fecha, devuelto) VALUES (?, ?, ?, ?);";
 				PreparedStatement st = cn.prepareStatement(consul);
-				st.setInt(1,prestamo.getId_Libro());
-				st.setInt(2,prestamo.getId_socio());
+				st.setInt(1,prestamo.getLibro().getId());
+				st.setInt(2,prestamo.getSocio().getId());
 				st.setDate(3,Date.valueOf(prestamo.getFecha()));
 				st.setBoolean(4,prestamo.isDevuelto());
 				st.executeUpdate();
@@ -247,8 +242,8 @@ public class GestorBBDD extends Conector{
 					Prestamo prestamo = new Prestamo();
 					prestamo.setDevuelto(rs.getBoolean("devuelto"));
 					prestamo.setFecha(String.valueOf(rs.getDate("fecha")));
-					prestamo.setId_Libro(rs.getInt("id_libro"));
-					prestamo.setId_socio(rs.getInt("id_socio"));
+					prestamo.setSocio(getSocioId(rs.getInt("id_socio")));
+					prestamo.setLibro(getLibroConId(rs.getInt("id_libro")));
 					prestamos.add(prestamo);
 				}
 			} catch (Exception e) {
@@ -259,31 +254,27 @@ public class GestorBBDD extends Conector{
 
 		public void PresDeSocio(Scanner scan) {
 			ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
-			ArrayList<Libro> libros = new ArrayList<Libro>();
 			try {
 				String dniSocio = FormulariosdeDatos.pedirDNISocio(scan);
-				Socio socio = new Socio();
-				socio = getSocioDNI(dniSocio);
-				
+				Prestamo prestamo = new Prestamo();
+				prestamo.setSocio(GestorBBDD.getSocioDNI(dniSocio));
 				String consulta = "SELECT * FROM prestamos WHERE id_socio=? ";
 				Connection cn = Conector.conectar();
 				PreparedStatement st = cn.prepareStatement(consulta);
-				st.setInt(1, socio.getId());
+				st.setInt(1, prestamo.getSocio().getId());
 				ResultSet rs = st.executeQuery();
 				while (rs.next()) {
-					Prestamo prestamo = new Prestamo();
+					prestamo = new Prestamo();
 					prestamo.setDevuelto(rs.getBoolean("devuelto"));
 					prestamo.setFecha(String.valueOf(rs.getDate("fecha")));
-					prestamo.setId_Libro(rs.getInt("id_libro"));
-					prestamo.setId_socio(rs.getInt("id_socio"));
-					libros = getLibroId(prestamo.getId_Libro(),libros);
+					prestamo.setSocio(getSocioId(rs.getInt("id_socio")));
+					prestamo.setLibro(getLibroConId(rs.getInt("id_libro")));
 					prestamos.add(prestamo);
 				}
 			} catch (Exception e) {
 				System.err.println(e);
 			}
-			libros.sort(new CompararAscen());
-			Visor.mostrarLibros(libros);
+			prestamos.sort(new CompararAscen());
 			Visor.mostrarPrestamosSocio(prestamos);
 		 }
 		public void ConsulDispoLibro(Scanner scan) {
@@ -356,5 +347,48 @@ public class GestorBBDD extends Conector{
 				e.printStackTrace();
 			}
 			return libros;
+		}
+		
+		public static Socio getSocioId(int id) {
+			String sql = "SELECT * FROM socios WHERE id = ?";
+			Connection cn = Conector.conectar();
+			Socio socio = new Socio();
+			try {
+				PreparedStatement st = cn.prepareStatement(sql);
+				st.setInt(1, id);
+				ResultSet rs = st.executeQuery();
+				while (rs.next()) {
+					socio.setNombre(rs.getString("nombre"));
+					socio.setApellido(rs.getString("apellido"));
+					socio.setDireccion(rs.getString("direccion"));
+					socio.setDni(rs.getString("dni"));
+					socio.setId(rs.getInt("id"));
+					socio.setPoblacion(rs.getString("poblacion"));
+					socio.setProvincia(rs.getString("provincia"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return socio;
+		}
+		
+		public static Libro getLibroConId(int id) {
+			String sql = "SELECT * FROM libros WHERE id = ?";
+			Connection cn = Conector.conectar();
+			Libro libro = new Libro();
+			try {
+				PreparedStatement st = cn.prepareStatement(sql);
+				st.setInt(1, id);
+				ResultSet rs = st.executeQuery();
+				while (rs.next()) {
+					libro.setAutor(rs.getString("autor"));
+					libro.setTitulo(rs.getString("titulo"));
+					libro.setId(rs.getInt("id"));
+					libro.setNum_pag(rs.getInt("num_pag"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return libro;
 		}
 	}

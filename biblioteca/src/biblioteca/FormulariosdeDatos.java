@@ -89,8 +89,8 @@ public class FormulariosdeDatos {
 			int id_Libro = pedirIdLibro(scan);
 			int id_Socio =  pedirIdSocio(scan);
 			String fechaActual = String.valueOf(LocalDate.now());
-			prestamo.setId_Libro(id_Libro);
-			prestamo.setId_socio(id_Socio);
+			prestamo.setLibro(GestorBBDD.getLibroConId(id_Libro));
+			prestamo.setSocio(GestorBBDD.getSocioId(id_Socio));
 			prestamo.setFecha(fechaActual);
 			prestamo.setDevuelto(false);
 			break;
@@ -108,8 +108,8 @@ public class FormulariosdeDatos {
 			int idSocio =  socio.getId();
 			
 			String fecha_Actual = String.valueOf(LocalDate.now());
-			prestamo.setId_Libro(idLibro);
-			prestamo.setId_socio(idSocio);
+			prestamo.setLibro(GestorBBDD.getLibroConId(idLibro));
+			prestamo.setSocio(GestorBBDD.getSocioId(idSocio));
 			prestamo.setFecha(fecha_Actual);
 			prestamo.setDevuelto(false);
 			break;

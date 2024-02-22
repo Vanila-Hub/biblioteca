@@ -2,12 +2,10 @@ package biblioteca;
 
 import java.util.Comparator;
 
-public class CompararAscen implements Comparator<Libro>{
-
+public class CompararAscen implements Comparator<Prestamo>{
 
 	@Override
-	public int compare(Libro o1, Libro o2) {
-		return o1.getTitulo().compareTo(o2.getAutor());
+	public int compare(Prestamo o1, Prestamo o2) {
+		return o1.getLibro().getTitulo().compareTo(o2.getLibro().getTitulo());
 	}
-
 }

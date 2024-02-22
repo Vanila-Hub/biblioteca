@@ -1,9 +1,10 @@
 package biblioteca;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Visor {
-	public static void mostrarLibros(ArrayList<Libro> Libros) {
+	public static void mostrarLibros(ArrayList<Libro> Libros) {        
 		System.out.println("\n Libros:");
 		System.out.print("\t");
 		for (Libro libro : Libros) {
@@ -41,9 +42,10 @@ public class Visor {
 		System.out.print("\n");
 	}
 	public static void mostrarPrestamosSocio(ArrayList<Prestamo> prestamos) {
+		System.out.println("Prestamos: \t");
 			for (Prestamo prestamo : prestamos) {
-				System.out.println("|_ _ _ " + prestamo.toString());
 				System.out.print("\t");
+				System.out.println("|_ _ _ " + prestamo.toString());
 			}
 			System.out.print("\n");
 	}
