@@ -91,7 +91,6 @@ public class GestorBBDD extends Conector{
 		} catch (Exception e) {
 			System.err.println(e);
 		}
-		Visor.mostrarLibros(libros);
 		return libros;
 	}
 	

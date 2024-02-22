@@ -36,17 +36,18 @@ public class GestorLibros {
 		}
 
 	private static void buscarLibro(Scanner scan) {
-	String titLibro = FormulariosdeDatos.pedirTituloLibro(scan);
-	String consulta = "SELECT * FROM libros";
-	libros =  baseDeDatos.verLibros(libros,consulta);
-	GestorIterador it = new GestorIterador();
-	it.iterar(libros,titLibro);
+		String titLibro = FormulariosdeDatos.pedirTituloLibro(scan);
+		String consulta = "SELECT * FROM libros";
+		libros =  baseDeDatos.verLibros(libros,consulta);
+		GestorIterador it = new GestorIterador();
+		it.iterar(libros,titLibro);
 		
 	}
 
 	public static void verLibros(Scanner scan) {
 		String consulta = "SELECT * FROM libros";
-		libros =  baseDeDatos.verLibros(libros,consulta);		
+		libros =  baseDeDatos.verLibros(libros,consulta);
+		Visor.mostrarLibros(libros);
 	}
 
 	private static void modificarLibro(Scanner scan) {

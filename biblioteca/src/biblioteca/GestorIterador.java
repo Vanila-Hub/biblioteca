@@ -13,9 +13,10 @@ public class GestorIterador {
 			Libro libro = (Libro) iterator.next();
 			
 			if (libro.getTitulo().contains(titLibro)) {
-				System.out.println(libro);
+					System.out.println("|_ _ _ " + libro.toString());
+					System.out.print("\t");
+					System.out.print("\n");
 			}
-			
 		}
 	}
 }
