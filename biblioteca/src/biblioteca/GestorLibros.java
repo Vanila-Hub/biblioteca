@@ -63,5 +63,6 @@ public class GestorLibros {
 			Libro libro = FormulariosdeDatos.pedirDtaosLibro(scan);
 			baseDeDatos.insertarLibro(libro);
 	}
+	
 }
 
