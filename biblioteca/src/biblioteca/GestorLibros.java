@@ -26,11 +26,23 @@ public class GestorLibros {
 					case Menu.VER_LIBROS:
 						verLibros(scan);
 						break;
+					case Menu.BUSCARLIBRO:
+						buscarLibro(scan);
+						break;
 					default:
 						break;
 					}
 				} while (opcion!=Menu.SALIR);
 		}
+
+	private static void buscarLibro(Scanner scan) {
+	String titLibro = FormulariosdeDatos.pedirTituloLibro(scan);
+	String consulta = "SELECT * FROM libros";
+	libros =  baseDeDatos.verLibros(libros,consulta);
+	GestorIterador it = new GestorIterador();
+	it.iterar(libros,titLibro);
+		
+	}
 
 	public static void verLibros(Scanner scan) {
 		String consulta = "SELECT * FROM libros";

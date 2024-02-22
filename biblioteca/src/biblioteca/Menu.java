@@ -25,6 +25,7 @@ package biblioteca;
         
         public static final int PRESTAMO_POR_ID = 1;
         public static final int PRESTAMO_POR_TITULO_DNI = 2;
+		public static final int BUSCARLIBRO = 5;
 
         public Menu() {
 			// TODO Auto-generated constructor stub
@@ -43,6 +44,7 @@ package biblioteca;
             System.out.println(ELIMINAR_LIBRO + ". Eliminar Libro");
             System.out.println(MODIFICAR_LIBRO + ". Modificar Libro");
             System.out.println(VER_LIBROS + ". Ver Libros");
+            System.out.println(BUSCARLIBRO + ". Buscar Libro");
             System.out.println(SALIR + ". Salir");
         }
         public void mostrarMenuSocios() {
